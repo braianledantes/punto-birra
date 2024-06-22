@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punto Birra | Carrito</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <!-- Icon -->
+    <link rel="shortcut icon" href="/images/icon-32x32.png" type="image/x-icon">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Moul&display=swap" rel="stylesheet">
+    <script src="/scripts/carrito.js" defer></script>
+    <script defer>
+        // cuando este cargada la pagina muestra el carrito
+        window.onload = function () {
+            mostrarCarrito();
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <a href="/">
+            <h1><i><img src="/images/icon-32x32.png"></i> Punto Birra</h1>
+        </a>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">Inicio</a>
+                </li>
+                <li>
+                    <a href="/pages/cervezas">Cervezas</a>
+                </li>
+                <li>
+                    <a href="/pages/carrito">Carrito</a>
+                </li>
+                <li>
+                    <a href="/pages/perfil">Perfil</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="carrito">
+            <h2>Carrito</h2>
+
+            <table>
+                <thead>
+                    <tr class="item-carrito">
+                        <th align="center">Imagen</th>
+                        <th align="left">Detalle</th>
+                        <th align="right">Cantidad</th>
+                        <th align="right">Precio</th>
+                        <th align="center">Opcion</th>
+                    </tr>
+                </thead>
+                <tbody id="carrito">
+                    <!-- <tr class="item-carrito">
+                        <td align="center" class="item-img"><img src="/images/birra-apa.jpeg" alt="Cerveza"></td>
+                        <td align="left" class="item-detalle">
+                            <p>Cerveza 1</p>
+                        </td>
+                        <td align="right" class="item-cantidad">
+                            <input type="number" value="1" min="1" onchange="modificarPrecioItem()">
+                        </td>
+                        <td align="right" class="item-precio">
+                            $ 100000000
+                        </td>
+                        <td align="center" class="item-opcion">
+                            <button class="btn-eliminar-item">Eliminar</button>
+                        </td>
+                    </tr> -->
+                    
+                </tbody>
+                <tfoot>
+                    <tr class="item-total">
+                        <td align="right" colspan="4">Total</td>
+                        <td align="center" id="totalCarrito">$ 0</td>
+                    </tr>
+                    <tr class="item-comprar-carrito">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="center">
+                            <button class="btn-comprar" onclick="comprarCarrito()">Comprar</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+    </main>
+
+    <footer>
+        <a href="">Acerca de</a>
+        <div>
+            <p>Contactos</p>
+            <ul>
+                <li>
+                    <a href="mailto:puntobirra@mail.com">puntobirra@mail.com</a>
+                </li>
+                <li>
+                    <a href="">Instagram</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>
