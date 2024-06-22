@@ -185,6 +185,18 @@ function mostrarTotal() {
 }
 
 function comprarCarrito() {
+    // comprueba si hay items en el carrito
+    var carrito = obtenerCarrito();
+    if (carrito.length == 0) {
+        // si no hay items, muestra un alert con el mensaje de carrito vacío
+        alert("El carrito está vacío!");
+        return;
+    }
+
+    if (!confirm("¿Desea confirmar la compra?")) {
+        return;
+    }
+
     // muestra un alert con el mensaje de compra realizada
     alert("Compra realizada con éxito!");
 
