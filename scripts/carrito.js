@@ -2,47 +2,47 @@ const cervezas = [
     {
         nombre: "APA",
         precio: 100,
-        imagen: "/images/birra-apa.jpeg"
+        imagen: "../../images/birra-apa.jpeg"
     },
     {
         nombre: "Golden",
         precio: 200,
-        imagen: "/images/birra-golden.jpeg"
+        imagen: "../../images/birra-golden.jpeg"
     },
     {
         nombre: "Honey",
         precio: 150,
-        imagen: "/images/birra-honey.jpeg"
+        imagen: "../../images/birra-honey.jpeg"
     },
     {
         nombre: "IPA",
         precio: 100,
-        imagen: "/images/birra-ipa.jpeg"
+        imagen: "../../images/birra-ipa.jpeg"
     },
     {
         nombre: "Irish Sout",
         precio: 200,
-        imagen: "/images/birra-irish-sout.jpeg"
+        imagen: "../../images/birra-irish-sout.jpeg"
     },
     {
         nombre: "Pandora Neipa",
         precio: 150,
-        imagen: "/images/birra-pandora-neipa.jpeg"
+        imagen: "../../images/birra-pandora-neipa.jpeg"
     },
     {
         nombre: "Porter",
         precio: 150,
-        imagen: "/images/birra-porter.jpeg"
+        imagen: "../../images/birra-porter.jpeg"
     },
     {
         nombre: "Scottish",
         precio: 100,
-        imagen: "/images/birra-scottish.jpeg"
+        imagen: "../../images/birra-scottish.jpeg"
     },
     {
         nombre: "Session IPA",
         precio: 200,
-        imagen: "/images/birra-session-ipa.jpeg"
+        imagen: "../../images/birra-session-ipa.jpeg"
     }
 ]
 
