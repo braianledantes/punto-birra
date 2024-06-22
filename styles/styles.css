@@ -118,6 +118,19 @@ section h2 {
     color: #f1f3f4;
 }
 
+.sobre-nosotros {
+    
+    width: 1400px;
+    padding: 5rem 0 7rem;
+    margin: 0 auto;
+}
+
+.sobre-nosotros p {
+    color: #333333;
+    width: 600px;
+    margin: 0 auto;
+}
+
 .donde-estamos h2 {
     width: 100%;
     color: #f1f3f4;
