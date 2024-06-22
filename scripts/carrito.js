@@ -185,6 +185,13 @@ function mostrarTotal() {
 }
 
 function comprarCarrito() {
+    // comprueba si hay usuario logueado
+    const usuario = localStorage.getItem("usuario");
+    if (!usuario) {
+        alert("Debe iniciar sesión para realizar la compra");
+        return;
+    }
+
     // comprueba si hay items en el carrito
     var carrito = obtenerCarrito();
     if (carrito.length == 0) {

@@ -356,3 +356,81 @@ footer ul li a {
     text-align: center;
     background-color: #f5f5f570;
 }
+
+/* perfil */
+.perfil {
+    padding: 10rem 0;
+    width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+}
+
+.image-perfil {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+/* register y loggin */
+
+.usuario {
+    padding: 2rem;
+}
+
+.register,
+.login {
+    padding: 0  2rem 2rem;
+    width: 900px;
+    margin: 0 auto 2rem;
+    background-color: #46464638;
+    border-radius: 15px;
+}
+
+.register form,
+.login form {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: .5fr 1fr;
+}
+
+.register form h2,
+.login form h2 {
+    margin: 1rem;
+    grid-column: 1 / -1;
+}
+
+.register form button,
+.login form button,
+#btnLogout {
+    margin-top: 2rem;
+    grid-column: 1 / -1;
+    justify-self: center;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: #333333;
+    color: #f5f5f5;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease,
+                color 0.3s ease;
+    font-size: 1.2rem;
+    padding: 10px 30px;
+}
+
+.register form button:hover,
+.login form button:hover,
+#btnLogout:hover {
+    background-color: #f5f5f5;
+    color: #333;
+    cursor: pointer;
+}
+
+.register form label,
+.login form label {
+    justify-self: end;
+}
