@@ -191,5 +191,5 @@ function comprarCarrito() {
     // limpia el carrito
     localStorage.removeItem("carrito");
     // redirige a la página de compra
-    window.location.href = "/";
+    window.location.reload();
 }
