@@ -1,5 +1,4 @@
 window.onload = function() {
-    console.log("Cargado");
     const btnIngresar = document.getElementById("btnIngresar");
     btnIngresar.addEventListener("click", iniciarSesion);
 
@@ -42,24 +41,66 @@ function iniciarSesion(e) {
 }
 
 function registrar(e) {
-    console.log("registrar");
-    
     e.preventDefault();
-    const nombre = document.getElementById("nombre").value;
-    const apellido = document.getElementById("apellido").value;
-    const email = document.getElementById("emailr").value;
-    const password = document.getElementById("constraseniar").value;
-    const fechaNacimiento = document.getElementById("fechaNacimiento").value;
+    const nombreInput = document.getElementById("nombre");
+    const apellidoInput = document.getElementById("apellido");
+    const emailInput = document.getElementById("emailr");
+    const passwordInput = document.getElementById("constraseniar");
+    const fechaNacimientoInput = document.getElementById("fechaNacimiento");
 
-    // verifica que los datos sean validos
-    if (!nombre || !apellido || !email || !password || !fechaNacimiento) {
-        alert("Todos los campos son obligatorios");
+    const nombre = nombreInput.value;
+    const apellido = apellidoInput.value;
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    const fechaNacimiento = fechaNacimientoInput.value;
+
+    let valido = true;
+
+    // valida que el nombre no este vacio
+    if (!nombre || nombre === "") {
+        nombreInput.style.border = "2px solid red";
+        valido = false;
+    } else {
+        nombreInput.style.border = "none";
+    }
+
+    // valida que el apellido no este vacio
+    if (!apellido || apellido === "") {
+        apellidoInput.style.border = "2px solid red";
+        valido = false;
+    } else {
+        apellidoInput.style.border = "none";
+    }
+
+    // valida que el email no este vacio
+    if (!email || email === "") {
+        emailInput.style.border = "2px solid red";
+        valido = false;
+    } else {
+        emailInput.style.border = "none";
+    }
+
+    // valida que el password no este vacio
+    if (!password || password === "") {
+        passwordInput.style.border = "2px solid red";
+        valido = false;
+    } else {
+        passwordInput.style.border = "none";
+    }
+
+    // no valida la fecha de nacimiento
+
+    if (!valido) {
         return;
     }
 
     // verifica que el email no este registrado
     if (existeUsuario(email)) {
         alert("El email ya esta registrado");
+        nombreInput.style.border = "2px solid red";
+        apellidoInput.style.border = "2px solid red";
+        emailInput.style.border = "2px solid red";
+        passwordInput.style.border = "2px solid red";
         return;
     }
 
