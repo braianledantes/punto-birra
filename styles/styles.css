@@ -157,7 +157,7 @@ section h2 {
     border-radius: 15px 15px 0 0;
 }
 
-.item-cerveza p {
+.item-cerveza h3 {
     font-size: 1.5rem;
     font-weight: 700;
     font-family: serif;
@@ -295,6 +295,38 @@ footer ul li a {
     color: #f5f5f5;
 }
 
+.carrito th:nth-child(1),
+.carrito td:nth-child(1) {
+    text-align: center;
+}
+
+.carrito th:nth-child(1),
+.carrito th:nth-child(5),
+.carrito td:nth-child(1),
+.carrito td:nth-child(5) {
+    text-align: center;
+}
+
+.carrito th:nth-child(2),
+.carrito td:nth-child(2) {
+    text-align: left;
+}
+
+.carrito th:nth-child(3),
+.carrito th:nth-child(4),
+.carrito td:nth-child(3),
+.carrito td:nth-child(4) {
+    text-align: right;
+}
+
+.item-total td:first-child {
+    text-align: right;
+}
+
+.item-total td:last-child {
+    text-align: center;
+}
+
 .carrito .btn-eliminar-item {
     background-color: #a51318;
     color: #f5f5f5;
@@ -372,13 +404,18 @@ footer ul li a {
 
 /* perfil */
 .perfil {
-    padding: 10rem 0;
+    padding: 5rem 0;
     width: 900px;
     margin: 0 auto;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
     gap: 30px;
+}
 
+.perfil h2 {
+    grid-column: 1 / -1;
+    text-align: center;
 }
 
 .image-perfil {

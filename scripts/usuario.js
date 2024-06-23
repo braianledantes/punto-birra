@@ -22,11 +22,13 @@ window.onload = function() {
 
 function iniciarSesion(e) {
     e.preventDefault();
-    var usuario = document.getElementById("email").value;
-    var password = document.getElementById("constrasenial").value;
+    const inputEmail = document.getElementById("email");
+    const inputPassword = document.getElementById("constrasenial");
+
+    const usuario = inputEmail.value;
+    const password = inputPassword.value;
 
     const usuarioEncontrado = validarUsuario(usuario, password);
-    console.log(usuario, password, usuarioEncontrado)
 
     if (usuarioEncontrado) {
         // guarda el usuario en el local storage
@@ -34,7 +36,8 @@ function iniciarSesion(e) {
         // recarga la pagina
         location.reload();
     } else {
-        alert("Usuario o contraseña incorrectos");
+        inputEmail.style.border = "2px solid red";
+        inputPassword.style.border = "2px solid red";
     }
 }
 

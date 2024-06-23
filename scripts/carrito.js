@@ -106,17 +106,17 @@ function mostrarCarrito() {
     carrito.forEach(item => {
         tbody.innerHTML += `
         <tr class="item-carrito">
-            <td align="center" class="item-img"><img src="${item.imagen}" alt="Cerveza"></td>
+            <td class="item-img"><img src="${item.imagen}" alt="Cerveza,  ${item.detalle}"></td>
             <td align="left" class="item-detalle">
                 <p>${item.detalle}</p>
             </td>
-            <td align="right" class="item-cantidad">
+            <td class="item-cantidad">
                 <input type="number" value="${item.cantidad}" min="1" onchange="modificarPrecioItem(this.parentNode.parentNode.rowIndex - 1)">
             </td>
-            <td align="right" class="item-precio">
+            <td class="item-precio">
                 $ ${item.precio}
             </td>
-            <td align="center" class="item-opcion">
+            <td class="item-opcion">
                 <button class="btn-eliminar-item" onclick='eliminarItemCarrito(this.parentNode.parentNode.rowIndex - 1)'>Eliminar</button>
             </td>
         </tr>
