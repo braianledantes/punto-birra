@@ -49,12 +49,7 @@ const cervezas = [
 function obtenerCarrito() {
     // recupera el carrito del local storage
     var carrito = localStorage.getItem("carrito");
-    if (carrito == null) {
-        carrito = [];
-    } else {
-        carrito = JSON.parse(carrito);
-    }
-    return carrito;
+    return carrito ? JSON.parse(carrito) : [];
 }
 
 function guardarCarrito(carrito) {
@@ -65,6 +60,11 @@ function agregarAlCarrito(nombreBirra) {
     var carrito = obtenerCarrito();
 
     const birra = cervezas.find(birra => birra.nombre === nombreBirra);
+
+    if (!birra) {
+        alert("Cerveza no encontrada!");
+        return;
+    }
 
     // si la cerveza está en el carrito, incrementa la cantidad
     const item = carrito.find(item => item.detalle === nombreBirra);
