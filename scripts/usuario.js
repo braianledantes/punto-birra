@@ -24,14 +24,14 @@ function iniciarSesion(e) {
     const inputEmail = document.getElementById("email");
     const inputPassword = document.getElementById("constrasenial");
 
-    const usuario = inputEmail.value;
+    const email = inputEmail.value;
     const password = inputPassword.value;
 
-    const usuarioEncontrado = validarUsuario(usuario, password);
+    const usuario = obtenerUsuarioPorEmailYPassword(email, password);
 
-    if (usuarioEncontrado) {
+    if (usuario) {
         // guarda el usuario en el local storage
-        localStorage.setItem("usuario", JSON.stringify(usuarioEncontrado));
+        guardarUsuarioLogueado(usuario);
         // recarga la pagina
         location.reload();
     } else {
@@ -95,7 +95,7 @@ function registrar(e) {
     }
 
     // verifica que el email no este registrado
-    if (existeUsuario(email)) {
+    if (obtenerUsuarioPorEmail(email)) {
         alert("El email ya esta registrado");
         nombreInput.style.border = "2px solid red";
         apellidoInput.style.border = "2px solid red";
@@ -111,47 +111,61 @@ function registrar(e) {
         password: password,
         fechaNacimiento: fechaNacimiento
     };
-    guardarUsuario(usuario);
+    
+    guardarUsuarioRegistrado(usuario);
 
     // guarda el usuario en el local storage
-    localStorage.setItem("usuario", JSON.stringify(usuario));
+    guardarUsuarioLogueado(usuario);
     // recarga la pagina
     location.reload();
 }
 
 function cerrarSesion() {
-    localStorage.removeItem("usuario");
+    eliminarUsuarioLogueado();
     location.reload();
     // scroll arriba
     window.scrollTo(0, 0);
 }
 
-function guardarUsuario(usuario) {
-    const usuarios = localStorage.getItem("usuarios") ? JSON.parse(localStorage.getItem("usuarios")) : [];
-    usuarios.push(usuario);
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-}
-
-function validarUsuario(email, password) {
-    const usuarios = localStorage.getItem("usuarios") ? JSON.parse(localStorage.getItem("usuarios")) : [];
-    const usuario = usuarios.find(function(u) {
-        return u.email === email && u.password === password;
-    });
-    return usuario;
-}
-
-function existeUsuario(email) {
-    const usuarios = localStorage.getItem("usuarios") ? JSON.parse(localStorage.getItem("usuarios")) : [];
-    const usuario = usuarios.find(function(u) {
-        return u.email === email;
-    });
-    return usuario;
-}
-
 function mostrarPerfil() {
-    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const usuario = obtenerUsuarioLogueado();
     document.getElementById("nombrePerfil").innerHTML = usuario.nombre;
     document.getElementById("apellidoPerfil").innerHTML = usuario.apellido;
     document.getElementById("emailPerfil").innerHTML = usuario.email;
     document.getElementById("fechaNacimientoPerfil").innerHTML = usuario.fechaNacimiento;
+}
+
+// localStorage
+function obtenerUsuariosRegistrados() {
+    const usuariosRegistrados = localStorage.getItem("usuarios") 
+    return usuariosRegistrados ? JSON.parse(usuariosRegistrados) : [];
+}
+
+function guardarUsuarioRegistrado(usuario) {
+    const usuarios = obtenerUsuariosRegistrados();
+    usuarios.push(usuario);
+    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+}
+
+function obtenerUsuarioPorEmail(email) {
+    const usuarios = obtenerUsuariosRegistrados();
+    return usuarios.find(usuario => usuario.email === email);
+}
+
+function obtenerUsuarioPorEmailYPassword(email, password) {
+    const usuarios = obtenerUsuariosRegistrados();
+    return usuarios.find(usuario => usuario.email === email && usuario.password === password);
+}
+
+function obtenerUsuarioLogueado() {
+    const usuario = localStorage.getItem("usuario");
+    return usuario ? JSON.parse(usuario) : null;
+}
+
+function guardarUsuarioLogueado(usuario) {
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+}
+
+function eliminarUsuarioLogueado() {
+    localStorage.removeItem("usuario");
 }
