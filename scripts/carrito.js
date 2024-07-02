@@ -118,9 +118,6 @@ function comprarCarrito() {
     vaciarCarrito();
 
     alert("Compra realizada con éxito!");
-
-    localStorage.removeItem("carrito");
-
     // recarga la pagina
     window.location.reload();
 }
