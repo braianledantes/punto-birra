@@ -35,7 +35,7 @@ carrito.items.forEach(item => {
 
     const tdPrecio = document.createElement("td");
     tdPrecio.classList.add("item-precio");
-    tdPrecio.textContent = `$ ${item.precio}`;
+    tdPrecio.textContent = `$ ${item.subtotal}`;
     tr.appendChild(tdPrecio);
 
     const tdOpcion = document.createElement("td");
@@ -68,6 +68,17 @@ function modificarPrecioItem(idCerveza, cantidad, rowIndex) {
     cantidad = parseInt(cantidad);
 
     agregarAlCarrito(idCerveza, cantidad);
+
+    const carrito = obtenerCarrito();
+    const item = carrito.items.find(item => item.id === idCerveza);
+
+    // obtiene la fila del item
+    const tbody = document.getElementById("carrito");
+    const tr = tbody.rows[rowIndex - 1];
+    
+    // modifica el precio del item
+    const tdPrecio = tr.querySelector(".item-precio");
+    tdPrecio.innerHTML = `$ ${item.subtotal}`;
 
     mostrarTotal();
 }

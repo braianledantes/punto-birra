@@ -18,14 +18,13 @@ sectionCerveza.innerHTML = `
 
     <div class="cerveza-detalles">
         <p>
-            La ${cerveza.nombre} es una cerveza de alta fermentación, de color ámbar, con un sabor y aroma a lúpulo muy
-            marcado. Es una cerveza muy popular en los Estados Unidos y en otros países.
+            ${cerveza.descripcion}
         </p>
 
         <div>
             <p><strong>Tipo:</strong> ${cerveza.nombre}</p>
-            <p><strong>Graduacion alcoholica:</strong> 4° </p>
-            <p><strong>Amargor:</strong> Fuerte</p>
+            <p><strong>Graduacion alcoholica:</strong> ${cerveza.graduacion}</p>
+            <p><strong>Amargor:</strong> ${cerveza.amargor}</p>
             <p><strong>Precio:</strong> $${cerveza.precio}</p>
         </div>
 
@@ -36,5 +35,8 @@ sectionCerveza.innerHTML = `
 // agrego el evento al boton de agregar al carrito
 const btnAgregarAlCarrito = document.getElementById("btnAgregarAlCarrito");
 btnAgregarAlCarrito.addEventListener("click", () => {
-    agregarAlCarrito(cerveza.id);
+    const agregado = agregarAlCarrito(cerveza.id);
+        if (agregado) {
+            alert("Cerveza agregada al carrito");
+        }
 });

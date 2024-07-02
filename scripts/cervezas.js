@@ -1,4 +1,4 @@
-import { obtenerTodasLasCervezas } from "./data.js";
+import { obtenerTodasLasCervezas, agregarAlCarrito } from "./data.js";
 
 const cervezas = obtenerTodasLasCervezas();
 const section = document.querySelector(".cervezas-queridas");
@@ -17,10 +17,25 @@ cervezas.forEach(cerveza => {
     h3.textContent = cerveza.nombre;
     article.appendChild(h3);
 
+    const divBotones = document.createElement("div");
+    divBotones.classList.add("botones");
+
     const a = document.createElement("a");
     a.href = `/pages/cervezas/cerveza.html?id=${cerveza.id}`;
     a.textContent = "Ver";
-    article.appendChild(a);
+    divBotones.appendChild(a);
+
+    const btn = document.createElement("button");
+    btn.textContent = "Agregar al carrito";
+    btn.addEventListener("click", () => {
+        const agregado = agregarAlCarrito(cerveza.id);
+        if (agregado) {
+            alert("Cerveza agregada al carrito");
+        }
+    });
+    divBotones.appendChild(btn);
+
+    article.appendChild(divBotones);
 
     section.appendChild(article);
 });
