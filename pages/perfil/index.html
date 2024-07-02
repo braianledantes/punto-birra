@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Moul&display=swap" rel="stylesheet">
     <!-- Scripts -->
-    <script src="../../scripts/usuario.js" defer></script>
+    <script type="module" src="../../scripts/usuario.js" defer></script>
 </head>
 
 <body>
@@ -42,7 +42,7 @@
     <main>
         <div class="usuario">
             <section class="login">
-                <form>
+                <form id="formLogin">
                     <h2>Iniciar Sesion</h2>
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" required>
@@ -53,30 +53,54 @@
             </section>
 
             <section class="register">
-                <form>
+                <form id="formRegister">
                     <h2>Registrarse</h2>
                     <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" required>
+                    <div class="campo-form">
+                        <input type="text" id="nombre" name="nombre" required>
+                        <p id="errorNombre" class="error-message">Nombre invalido</p>
+                    </div>
                     <label for="apellido">Apellido</label>
-                    <input type="text" id="apellido" name="apellido" required>
-                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                    <div class="campo-form">
+                        <input type="text" id="apellido" name="apellido" required>
+                        <p id="errorApellido" class="error-message">Apellido Invlido</p>
+                    </div>
                     <label for="emailr">Email</label>
-                    <input type="email" id="emailr" name="email" required>
+                    <div class="campo-form">
+                        <input type="email" id="emailr" name="email" required>
+                        <p id="errorEmail" class="error-message">Email invalido</p>
+                    </div>
                     <label for="constraseniar">Contraseña</label>
-                    <input type="password" id="constraseniar" name="constrasenia" required>
+                    <div class="campo-form">
+                        <input type="password" id="constraseniar" name="constrasenia" required>
+                        <p id="errorPassword" class="error-message">Contraseña invalida</p>
+                    </div>
+                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                    <div class="campo-form">
+                        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                        <p id="errorFechaNacimiento" class="error-message">Fecha invalida</p>
+                    </div>
+                    <label for="telefono">Telefono</label>
+                    <div class="campo-form" >
+                        <input type="tel" id="telefono" name="telefono" required>
+                        <p id="errorTelefono" class="error-message">Telefono invalido</p>
+                    </div>
                     <button type="submit" id="btnRegister">Registrarse</button>
                 </form>
             </section>
 
             <section class="perfil">
                 <h2>Perfil de usuario</h2>
-                <img class="image-perfil" src="../../images/birra-porter.jpeg" alt="foto de perfil del usuario">
+                <svg class="image-perfil" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                  </svg>
                 <div class="datos-usuario">
                     <p><strong>Nombre: </strong><samp id="nombrePerfil"></samp></p>
                     <p><strong>Apellido: </strong><samp id="apellidoPerfil"></samp></p>
+                    <p><strong>Nacimiento: </strong> <samp id="fechaNacimientoPerfil"></samp></p>
                     <p><strong>Email: </strong><samp id="emailPerfil"></samp></p>
-                    <p><strong>Fecha Nacimiento: </strong> <samp id="fechaNacimientoPerfil"></samp></p>
+                    <p><strong>Telefono: </strong><samp id="telefonoPerfil"></samp></p>
                     <button type="submit" id="btnLogout">Cerrar Sesion</button>
                 </div>
             </section>

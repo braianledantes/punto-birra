@@ -13,13 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Moul&display=swap" rel="stylesheet">
     <!-- Scripts -->
-    <script src="../../scripts/carrito.js" defer></script>
-    <script>
-        // cuando este cargada la pagina muestra el carrito
-        window.onload = function () {
-            mostrarCarrito();
-        }
-    </script>
+    <script type="module" src="../../scripts/carrito.js" defer></script>
 </head>
 
 <body>
@@ -89,7 +83,7 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <button class="btn-comprar" onclick="comprarCarrito()">Comprar</button>
+                            <button class="btn-comprar" id="btnComprar">Comprar</button>
                         </td>
                     </tr>
                 </tfoot>

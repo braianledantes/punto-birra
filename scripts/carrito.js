@@ -1,148 +1,73 @@
-const cervezas = [
-    {
-        nombre: "APA",
-        precio: 2500,
-        imagen: "../../images/birra-apa.jpeg"
-    },
-    {
-        nombre: "Golden",
-        precio: 2200,
-        imagen: "../../images/birra-golden.jpeg"
-    },
-    {
-        nombre: "Honey",
-        precio: 2500,
-        imagen: "../../images/birra-honey.jpeg"
-    },
-    {
-        nombre: "IPA",
-        precio: 2500,
-        imagen: "../../images/birra-ipa.jpeg"
-    },
-    {
-        nombre: "Irish Sout",
-        precio: 2400,
-        imagen: "../../images/birra-irish-sout.jpeg"
-    },
-    {
-        nombre: "Pandora Neipa",
-        precio: 2600,
-        imagen: "../../images/birra-pandora-neipa.jpeg"
-    },
-    {
-        nombre: "Porter",
-        precio: 2500,
-        imagen: "../../images/birra-porter.jpeg"
-    },
-    {
-        nombre: "Scottish",
-        precio: 2400,
-        imagen: "../../images/birra-scottish.jpeg"
-    },
-    {
-        nombre: "Session IPA",
-        precio: 2300,
-        imagen: "../../images/birra-session-ipa.jpeg"
-    }
-]
+import { agregarAlCarrito, eliminarDelCarrito, obtenerCarrito, vaciarCarrito } from "./data.js";
 
-function obtenerCarrito() {
-    // recupera el carrito del local storage
-    var carrito = localStorage.getItem("carrito");
-    return carrito ? JSON.parse(carrito) : [];
-}
+var carrito = obtenerCarrito();
 
-function guardarCarrito(carrito) {
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-}
+const tbody = document.getElementById("carrito");
 
-function agregarAlCarrito(nombreBirra) {
-    var carrito = obtenerCarrito();
+carrito.items.forEach(item => {
+    const tr = document.createElement("tr");
+    tr.classList.add("item-carrito");
 
-    const birra = cervezas.find(birra => birra.nombre === nombreBirra);
+    const tdImg = document.createElement("td");
+    tdImg.classList.add("item-img");
+    const img = document.createElement("img");
+    img.src = item.imagen;
+    img.alt = "Cerveza";
+    tdImg.appendChild(img);
+    tr.appendChild(tdImg);
 
-    if (!birra) {
-        alert("Cerveza no encontrada!");
-        return;
-    }
+    const tdDetalle = document.createElement("td");
+    tdDetalle.classList.add("item-detalle");
+    const p = document.createElement("p");
+    p.textContent = item.nombre;
+    tdDetalle.appendChild(p);
+    tr.appendChild(tdDetalle);
 
-    // si la cerveza está en el carrito, incrementa la cantidad
-    const item = carrito.find(item => item.detalle === nombreBirra);
-    if (item) {
-        item.cantidad++;
-        item.precio = item.cantidad * birra.precio;
-    } else {
-        // si no está, la agrega
-        carrito.push({
-            imagen: birra.imagen,
-            detalle: birra.nombre,
-            precio: birra.precio,
-            cantidad: 1
-        });
-    }
+    const tdCantidad = document.createElement("td");
+    tdCantidad.classList.add("item-cantidad");
+    const inputCant = document.createElement("input");
+    inputCant.type = "number";
+    inputCant.value = item.cantidad;
+    inputCant.min = 1;
+    inputCant.onchange = () => modificarPrecioItem(item.id, inputCant.value, tr.rowIndex);
+    tdCantidad.appendChild(inputCant);
+    tr.appendChild(tdCantidad);
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    const tdPrecio = document.createElement("td");
+    tdPrecio.classList.add("item-precio");
+    tdPrecio.textContent = `$ ${item.precio}`;
+    tr.appendChild(tdPrecio);
 
-    alert("Cerveza agregada al carrito!");
-}
+    const tdOpcion = document.createElement("td");
+    tdOpcion.classList.add("item-opcion");
+    const btnEliminar = document.createElement("button");
+    btnEliminar.classList.add("btn-eliminar-item");
+    btnEliminar.textContent = "Eliminar";
+    btnEliminar.onclick = () => eliminarItemCarrito(item.id, tr.rowIndex);
+    tdOpcion.appendChild(btnEliminar);
 
-function mostrarCarrito() {
-    var carrito = obtenerCarrito();
+    tr.appendChild(tdOpcion);
 
+    tbody.appendChild(tr);
+});
+
+mostrarTotal();
+
+
+function eliminarItemCarrito(idCerveza, rowIndex) {
     const tbody = document.getElementById("carrito");
+    tbody.deleteRow(rowIndex - 1);
 
-    carrito.forEach(item => {
-        tbody.innerHTML += `
-        <tr class="item-carrito">
-            <td class="item-img"><img src="${item.imagen}" alt="Cerveza,  ${item.detalle}"></td>
-            <td align="left" class="item-detalle">
-                <p>${item.detalle}</p>
-            </td>
-            <td class="item-cantidad">
-                <input type="number" value="${item.cantidad}" min="1" onchange="modificarPrecioItem(this.parentNode.parentNode.rowIndex - 1)">
-            </td>
-            <td class="item-precio">
-                $ ${item.precio}
-            </td>
-            <td class="item-opcion">
-                <button class="btn-eliminar-item" onclick='eliminarItemCarrito(this.parentNode.parentNode.rowIndex - 1)'>Eliminar</button>
-            </td>
-        </tr>
-        `;
-    });
+    eliminarDelCarrito(idCerveza);
 
     mostrarTotal();
 }
 
-function eliminarItemCarrito(rowIndex) {
-    const myTable = document.getElementById("carrito");
-    myTable.deleteRow(rowIndex);
+function modificarPrecioItem(idCerveza, cantidad, rowIndex) {
+    // obtiene la cantidad ingresada
+    cantidad = parseInt(cantidad);
 
-    var carrito = obtenerCarrito();
-    carrito.splice(rowIndex, 1);
-
-    guardarCarrito(carrito);
-
-    mostrarTotal();
-}
-
-function modificarPrecioItem(rowIndex) {
-
-    var carrito = obtenerCarrito();
-
-    const birra = cervezas.find(birra => birra.nombre === carrito[rowIndex].detalle);
-
-    // obtengo la cantidad
-    const cantidadString = document.getElementsByClassName("item-cantidad")[rowIndex].children[0].value;
-
-    // modifico la cantidad
-    carrito[rowIndex].cantidad = parseInt(cantidadString);
-    carrito[rowIndex].precio = carrito[rowIndex].cantidad * birra.precio;
-
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-
-    // muestra el precio en la pagina
-    document.getElementsByClassName("item-precio")[rowIndex].innerHTML = `$ ${carrito[rowIndex].precio}`;
+    agregarAlCarrito(idCerveza, cantidad);
 
     mostrarTotal();
 }
@@ -151,10 +76,13 @@ function mostrarTotal() {
     var carrito = obtenerCarrito();
 
     // calcula el total
-    var total = carrito.reduce((acc, item) => acc + item.precio, 0);
+    var total = carrito.total;
 
     document.getElementById("totalCarrito").innerHTML = `$ ${total}`;
 }
+
+// btn-comprar
+document.getElementById("btnComprar").addEventListener("click", comprarCarrito);
 
 function comprarCarrito() {
     // comprueba si hay usuario logueado
@@ -174,6 +102,9 @@ function comprarCarrito() {
     if (!confirm("¿Desea confirmar la compra?")) {
         return;
     }
+
+    // vacia el carrito de la base de datos
+    vaciarCarrito();
 
     alert("Compra realizada con éxito!");
 

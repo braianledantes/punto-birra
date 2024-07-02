@@ -425,8 +425,8 @@ footer ul li a {
 }
 
 .image-perfil {
-    width: 400px;
-    height: 400px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     display: block;
     border-radius: 50%;
@@ -489,4 +489,17 @@ footer ul li a {
 .register form label,
 .login form label {
     justify-self: end;
+}
+
+.register form .campo-form,
+.login form .campo-form {
+    display: grid;
+}
+
+.register form .error-message,
+.login form .error-message {
+    display: none;
+    font-size: small;
+    color: #880000;
+    text-shadow: 1px 1px 2px #797979;
 }
